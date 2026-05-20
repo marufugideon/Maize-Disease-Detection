@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="welcome-container">
+    <div class="welcome-box">
+        <div class="welcome-header">
+            <h1 class="welcome-title">WELCOME TO MAIZE DISEASE DETECTION SYSTEM</h1>
+            <p class="welcome-subtitle">An AI-powered diagnostic system for detecting common maize diseases</p>
+        </div>
+        
+        <div class="welcome-features">
+            <div class="feature-card">
+                <i class="bi bi-upload"></i>
+                <h3>Easy Upload</h3>
+                <p>Multiple ways to submit leaf images for analysis</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="bi bi-robot"></i>
+                <h3>AI Analysis</h3>
+                <p>Advanced deep learning model for accurate detection</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="bi bi-clipboard2-pulse"></i>
+                <h3>Multi-Disease</h3>
+                <p>Detects 5 common maize diseases and healthy plants</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="bi bi-lightbulb"></i>
+                <h3>Expert Advice</h3>
+                <p>Personalised recommendations for disease management</p>
+            </div>
+        </div>
+        
+        <div class="welcome-actions">
+            <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">
+                <i class="bi bi-box-arrow-in-right"></i> Login to System
+            </a>
+            <a href="{{ url_for('about') }}" class="btn btn-outline-secondary btn-lg">
+                <i class="bi bi-info-circle"></i> Learn More
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1 class="text-center mb-4">Maize Disease Detection</h1>
+    
+    <!-- Disease Quick Stats -->
+    <div class="disease-stats mb-4">
+        <div class="row">
+            {% for disease in diseases %}
+            <div class="col-md-2 col-sm-4 mb-3">
+                <div class="disease-stat-card text-center p-2">
+                    <div class="disease-icon disease-{{ disease_info[disease]['color'] }}">
+                        <i class="bi bi-droplet"></i>
+                    </div>
+                    <h6 class="mt-2 mb-0">{{ disease }}</h6>
+                    <small class="text-muted">{{ stats.get(disease.lower().replace(' ', '_'), 0) }} detections</small>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="dashboard-grid">
+        <!-- Left Panel - Image Upload -->
+        <div class="upload-container">
+            <h2><i class="bi bi-upload"></i> Upload Image</h2>
+            
+            <!-- Drag & Drop Area -->
+            <div id="drop-area" class="drop-zone">
+                <div class="drop-content">
+                    <i class="bi bi-cloud-arrow-up"></i>
+                    <p>Drag & drop maize leaf image here</p>
+                    <small class="text-muted">or</small>
+                    
+                    <div class="upload-buttons">
+                        <input type="file" id="file-input" class="d-none" accept="image/*">
+                        <button id="browse-btn" class="btn btn-primary btn-sm">
+                            <i class="bi bi-folder2-open"></i> Browse Files
+                        </button>
+                        <button id="camera-btn" class="btn btn-secondary btn-sm">
+                            <i class="bi bi-camera"></i> Use Camera
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Camera Preview Section -->
+            <div class="camera-section d-none">
+                <div class="camera-preview-container">
+                    <video id="camera-preview" class="camera-preview" autoplay playsinline></video>
+                </div>
+                <div class="camera-controls">
+                    <button id="capture-btn" class="btn btn-success btn-sm">
+                        <i class="bi bi-camera-fill"></i> Capture
+                    </button>
+                    <button id="stop-camera-btn" class="btn btn-danger btn-sm">
+                        <i class="bi bi-x-circle"></i> Stop Camera
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Image Preview -->
+            <div id="image-preview" class="image-preview"></div>
+            
+            <!-- Detect Button -->
+            <button id="detect-btn" class="btn btn-accent" disabled>
+                <span id="detect-text"><i class="bi bi-magic"></i> Detect Disease</span>
+                <span id="detect-spinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+            </button>
+        </div>
+        
+        <!-- Right Panel - Results Display -->
+        <div class="results-container">
+            <h2><i class="bi bi-clipboard2-pulse"></i> Results</h2>
+            
+            <div id="results-content" class="results-content">
+                <!-- Empty State -->
+                <div id="empty-results" class="empty-results">
+                    <i class="bi bi-arrow-left"></i>
+                    <p>Upload an image to see results</p>
+                </div>
+                
+                <!-- Results Display -->
+                <div id="results-display" class="d-none">
+                    <div id="prediction-result" class="alert"></div>
+                    
+                    <div class="disease-info-box mt-3 p-3" id="disease-info">
+                        <h5><i class="bi bi-info-circle"></i> Disease Information</h5>
+                        <p id="disease-description"></p>
+                        <button class="btn btn-sm btn-outline-info mt-2" id="more-info-btn">
+                            <i class="bi bi-book"></i> Learn More
+                        </button>
+                    </div>
+                    
+                    <button id="show-confidence-btn" class="btn btn-info mt-3">
+                        <i class="bi bi-graph-up"></i> Show Confidence Level
+                    </button>
+                    
+                    <div id="confidence-display" class="d-none mt-3">
+                        <div class="confidence-meter">
+                            <h5>Confidence Level</h5>
+                            <div class="confidence-bar">
+                                <div id="confidence-level" class="confidence-level"></div>
+                            </div>
+                            <span id="confidence-value" class="confidence-value">0%</span>
+                        </div>
+                    </div>
+                    
+                    <button id="recommend-btn" class="btn btn-recommend mt-3">
+                        <i class="bi bi-lightbulb"></i> Get Recommendations
+                    </button>
+                    
+                    <div id="recommendations" class="recommendations-box mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

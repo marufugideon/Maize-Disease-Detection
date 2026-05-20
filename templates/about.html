@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="about-container">
+    <!-- Technology Stack Section -->
+    <div class="section technology-stack">
+        <h2 class="section-title"><i class="bi bi-stack"></i> Technology Stack</h2>
+        
+        <div class="tech-grid">
+            <div class="tech-card">
+                <h3><i class="bi bi-cpu"></i> Model Architecture</h3>
+                <ul>
+                    <li>Convolutional Neural Network</li>
+                    <li>Custom Attention Layers</li>
+                    <li>Transfer Learning</li>
+                    <li>Deep Learning</li>
+                </ul>
+            </div>
+            
+            <div class="tech-card">
+                <h3><i class="bi bi-code-slash"></i> Development</h3>
+                <ul>
+                    <li>Python 3.9</li>
+                    <li>TensorFlow 2.10</li>
+                    <li>Keras</li>
+                    <li>Flask Framework</li>
+                </ul>
+            </div>
+            
+            <div class="tech-card">
+                <h3><i class="bi bi-database"></i> Dataset</h3>
+                <ul>
+                    <li>PlantVillage Dataset</li>
+                    <li>Custom Maize Disease Collection</li>
+                    <li>6 Disease Categories</li>
+                    <li>2000+ Training Images</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Features Section -->
+    <div class="section key-features">
+        <h2 class="section-title"><i class="bi bi-stars"></i> Key Features</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="bi bi-upload"></i>
+                <h3>Multiple Upload Methods</h3>
+                <p>Upload via file browser, drag & drop, or direct camera capture</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="bi bi-robot"></i>
+                <h3>AI-Powered Detection</h3>
+                <p>Advanced CNN model for accurate maize disease identification</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="bi bi-clipboard2-data"></i>
+                <h3>Multi-Disease Support</h3>
+                <p>Detects 4 common maize diseases, healthy and non maize images</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="bi bi-lightbulb"></i>
+                <h3>Actionable Recommendations</h3>
+                <p>Customised advice based on detection results</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Disease Information Section -->
+    <div class="section disease-info">
+        <h2 class="section-title"><i class="bi bi-clipboard2-pulse"></i> Supported Diseases</h2>
+        
+        <div class="disease-grid">
+            {% for disease, info in disease_info.items() %}
+            <div class="disease-card disease-{{ info.color }}">
+                <h3>{{ disease }}</h3>
+                <p>{{ info.description }}</p>
+                <div class="disease-management">
+                    <strong>Management:</strong> {{ info.management }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Developer Information -->
+    <div class="section developer-info">
+        <h2 class="section-title"><i class="bi bi-person-badge"></i> Developer Information</h2>
+        
+        <div class="developer-card">
+            <div class="developer-avatar">
+                <i class="bi bi-person-circle"></i>
+            </div>
+            <div class="developer-details">
+                <h3>{{ user.name }}</h3>
+                <p class="text-muted">{{ user.email }}</p>
+                <p class="text-muted">{{ user.phone }}</p>
+                
+                <div class="contact-methods">
+                    <a href="mailto:{{ user.email }}" class="btn btn-outline-primary">
+                        <i class="bi bi-envelope"></i> Email
+                    </a>
+                    <a href="tel:{{ user.phone }}" class="btn btn-outline-success">
+                        <i class="bi bi-phone"></i> Call
+                    </a>
+                    <a href="https://wa.me/{{ user.whatsapp }}" class="btn btn-outline-info">
+                        <i class="bi bi-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="www.linkedin.com/in/gideonmarufu" class="btn btn-outline-dark">
+                        <i class="bi bi-github"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-primary">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
